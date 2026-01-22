@@ -1,0 +1,44 @@
+# Oracle Brain - Untracked
+ψ/active/
+ψ/incubate/
+ψ/learn/
+
+# Temporary files
+.tmp/
+*.tmp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Databases
+*.sqlite3
+*.db
+*.duckdb
+.chromadb/
+chroma_data/
+
+# Build outputs
+dist/
+build/
+*.egg-info/
+
+# Environment
+.env
+.env.local
+*.local
+
+# Logs (keep structure, ignore contents)
+ψ/memory/logs/*.log
+!ψ/memory/logs/.gitkeep
