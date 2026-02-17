@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arthur Morgan: A Life Redeemed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #b32d1f;
+            --text-color: #e0e0e0;
+            --transition-speed: 0.8s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Scroll Progress Bar */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-color);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* Container & Slides */
+        .container {
+            width: 100%;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5vw;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #222;
+        }
+
+        .content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* Typography */
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .accent {
+            color: var(--accent-color);
+        }
+
+        .quote {
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #aaa;
+        }
+
+        p {
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Images */
+        .image-wrapper {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 20px- 50px rgba(0,0,0,0.5);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(20%) contrast(110%);
+            transition: transform 1s ease;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .quote {
+                border-left: none;
+                border-top: 2px solid var(--accent-color);
+                padding: 15px 0;
+            }
+            section {
+                padding-top: 100px;
+                padding-bottom: 100px;
+            }
+        }
+
+        /* Special backgrounds */
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(179, 45, 31, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress"></div>
+
+    <div class="container">
+        <section id="slide-1">
+            <div class="bg-overlay"></div>
+            <div class="content">
+                <div class="text reveal-left">
+                    <h2 class="accent">The Outlaw</h2>
+                    <p>Arthur Morgan is the lead enforcer of the Van der Linde gang. Raised by Dutch van der Linde and Hosea Matthews, he is a man torn between the brutal world of the Wild West and the shifting tides of civilization.</p>
+                    <div class="quote">"We're thieves in a world that don't want us no more."</div>
+                </div>
+                <div class="image-wrapper reveal">
+                    <img src="https://wallpapers.com/images/hd/arthur-morgan-red-dead-redemption-2-mrtayp7i7u05r2lq.jpg" alt="Arthur Morgan Profile">
+                </div>
+            </div>
+        </section>
+
+        <section id="slide-2">
+            <div class="content">
+                <div class="image-wrapper reveal-left" style="order: 2;">
+                    <img src="https://gamingbolt.com/wp-content/uploads/2018/10/Red-Dead-Redemption-2-Van-der-Linde-Gang.jpg" alt="Van der Linde Gang">
+                </div>
+                <div class="text reveal" style="order: 1;">
+                    <h2 class="accent">The Brotherhood</h2>
+                    <p>Loyalty was everything. For Arthur, the gang wasn't just a group of criminals; it was his only family. He carried the weight of their survival on his shoulders, executing jobs across the heartland.</p>
+                    <div class="quote">"I gave you all I had. I did."</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="slide-3">
+            <div class="bg-overlay"></div>
+            <div class="content">
+                <div class="text reveal-left">
+                    <h2 class="accent">The Affliction</h2>
+                    <p>A routine debt collection led to a terminal diagnosis. Tuberculosis changed Arthur's perspective, forcing him to confront his mortality and the morality of his past actions.</p>
+                    <div class="quote">"I'm afraid."</div>
+                </div>
+                <div class="image-wrapper reveal">
+                    <img src="https://r

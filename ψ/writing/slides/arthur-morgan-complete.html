@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arthur Morgan: A Life Redeemed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-color: #b32d1f;
+            --text-color: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5vw;
+            border-bottom: 1px solid #222;
+        }
+
+        .content {
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        .quote {
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #888;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .content { grid-template-columns: 1fr; }
+            h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1 -->
+    <section>
+        <div class="content">
+            <div class="reveal">
+                <h2>The Outlaw</h2>
+                <p>Arthur Morgan is the lead enforcer of the Van der Linde gang. Raised by Dutch van der Linde and Hosea Matthews, he is a man torn between the brutal world of the Wild West and the shifting tides of civilization.</p>
+                <div class="quote">"We're thieves in a world that don't want us no more."</div>
+            </div>
+            <div class="reveal">
+                <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600" alt="Western Sunset">
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section>
+        <div class="content">
+            <div class="reveal">
+                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600" alt="Journey">
+            </div>
+            <div class="reveal">
+                <h2>The Brotherhood</h2>
+                <p>Loyalty was everything. For Arthur, the gang wasn't just a group of criminals; it was his only family. He carried the weight of their survival on his shoulders.</p>
+                <div class="quote">"I gave you all I had. I did."</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section>
+        <div class="content">
+            <div class="reveal">
+                <h2>The Affliction</h2>
+                <p>A routine debt collection led to a terminal diagnosis. Tuberculosis changed Arthur's perspective, forcing him to confront his mortality and the morality of his past actions.</p>
+                <div class="quote">"I'm afraid."</div>
+            </div>
+            <div class="reveal">
+                <img src="https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=600" alt="Solitude">
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4 -->
+    <section>
+        <div class="content">
+            <div class="reveal">
+                <img src="https://images.unsplash.com/photo-1494783367193-149034c05e8f?w=600" alt="Mountain">
+            </div>
+            <div class="reveal">
+                <h2>Redemption</h2>
+                <p>In his final days, Arthur chose to help others escape the life he could not. He found peace not in survival, but in sacrifice—protecting those who still had a chance.</p>
+                <div class="quote">"I tried... in the end, I did."</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5 -->
+    <section>
+        <div class="content">
+            <div class="reveal">
+                <h2>Legacy</h2>
+                <p>Arthur Morgan's story is one of transformation. From outlaw to protector, his journey reminds us that it's never too late to choose who we want to be.</p>
+                <div class="quote">"We're more ghosts than people."</div>
+            </div>
+            <div class="reveal">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600" alt="Horizon">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
