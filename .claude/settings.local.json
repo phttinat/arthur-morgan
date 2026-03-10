@@ -133,7 +133,13 @@
       "mcp__coplay-mcp__get_unity_editor_state",
       "mcp__coplay-mcp__check_compile_errors",
       "Bash(ls:*)",
-      "mcp__coplay-mcp__get_game_object_info"
+      "mcp__coplay-mcp__get_game_object_info",
+      "mcp__coplay-mcp__get_unity_logs",
+      "Bash(Get-ChildItem -Path \"E:\\\\CAMT-Reserve\\\\Assets\" -Recurse -Filter \"*Local*\" -Directory)",
+      "Bash(Select-Object -First 10 -ExpandProperty FullName)",
+      "Bash(git restore:*)",
+      "Bash(xargs ls:*)",
+      "Bash(git -C \"D:/Cluade/arthur-morgan\" status --short)"
     ]
   }
 }
