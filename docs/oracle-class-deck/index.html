@@ -12,9 +12,9 @@
       --bg:    #090909;
       --sur:   #131313;
       --sur2:  #1E1E1E;
-      --gold:  #C4902A;
-      --goldb: #D9A028;
-      --golds: rgba(196,144,42,0.18);
+      --gold:  #C6A86B;
+      --goldb: #D4B870;
+      --golds: rgba(198,168,107,0.18);
       --blue:  #5B9CF6;
       --green: #34D399;
       --ink:   #F0EEF8;
@@ -45,21 +45,21 @@
     }
     .orb-1 {
       width:700px; height:700px;
-      background:radial-gradient(circle, rgba(196,144,42,0.18) 0%, transparent 65%);
+      background:radial-gradient(circle, rgba(198,168,107,0.18) 0%, transparent 65%);
       filter:blur(90px);
       top:-180px; left:-140px;
       animation:drift1 24s ease-in-out infinite alternate;
     }
     .orb-2 {
       width:580px; height:580px;
-      background:radial-gradient(circle, rgba(200,130,20,0.10) 0%, transparent 65%);
+      background:radial-gradient(circle, rgba(198,168,107,0.10) 0%, transparent 65%);
       filter:blur(100px);
       top:80px; right:-160px;
       animation:drift2 30s ease-in-out infinite alternate;
     }
     .orb-3 {
       width:480px; height:480px;
-      background:radial-gradient(circle, rgba(196,144,42,0.10) 0%, transparent 65%);
+      background:radial-gradient(circle, rgba(198,168,107,0.10) 0%, transparent 65%);
       filter:blur(80px);
       bottom:-120px; left:38%;
       animation:drift3 20s ease-in-out infinite alternate;
@@ -120,7 +120,7 @@
     .ghost {
       position:absolute; right:-20px; bottom:-80px;
       font-size:520px; font-weight:800;
-      color:rgba(196,144,42,0.04);
+      color:rgba(198,168,107,0.04);
       line-height:1; letter-spacing:-.06em;
       user-select:none; pointer-events:none;
       font-family:'Prompt', sans-serif;
@@ -131,7 +131,7 @@
     .bar-fill {
       height:100%;
       background:linear-gradient(90deg, var(--gold), var(--goldb));
-      box-shadow:0 0 14px rgba(196,144,42,0.5);
+      box-shadow:0 0 14px rgba(198,168,107,0.5);
     }
 
     /* Body */
@@ -225,7 +225,7 @@
     .step-row { display:flex; align-items:flex-start; gap:20px; }
     .step-num {
       width:38px; height:38px; flex-shrink:0; border-radius:50%;
-      background:var(--golds); border:1px solid rgba(196,144,42,0.55);
+      background:var(--golds); border:1px solid rgba(198,168,107,0.55);
       color:var(--goldb); font-size:16px; font-weight:600;
       display:flex; align-items:center; justify-content:center; margin-top:5px;
     }
@@ -272,7 +272,7 @@
       padding:4px 14px; border-radius:20px;
     }
     .badge-have { background:rgba(91,156,246,0.12); color:var(--blue); }
-    .badge-get  { background:rgba(196,144,42,0.12); color:var(--goldb); }
+    .badge-get  { background:rgba(198,168,107,0.12); color:var(--goldb); }
 
     /* Prompt box */
     .prompt-box {
@@ -364,7 +364,7 @@
     }
     .ndot.on {
       width:24px; background:var(--gold);
-      box-shadow:0 0 10px rgba(196,144,42,.5);
+      box-shadow:0 0 10px rgba(198,168,107,.5);
     }
   </style>
 </head>
@@ -380,7 +380,7 @@
 
   <!-- 1 · TITLE -->
   <div class="slide active">
-    <div class="glow" style="width:600px;height:600px;background:radial-gradient(circle,rgba(196,144,42,.08) 0%,transparent 70%);right:-100px;top:-100px;pointer-events:none;"></div>
+    <div class="glow" style="width:600px;height:600px;background:radial-gradient(circle,rgba(198,168,107,.08) 0%,transparent 70%);right:-100px;top:-100px;pointer-events:none;"></div>
     <div class="bar"><div class="bar-fill" style="width:9.1%"></div></div>
     <div class="body" style="justify-content:center;">
       <div class="kicker">NDF Workshop · Soul-Brews-Studio</div>
@@ -631,7 +631,7 @@
   <div class="slide">
     <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
     <div class="body" style="align-items:center;justify-content:center;text-align:center;">
-      <div style="font-size:96px;margin-bottom:36px;line-height:1;filter:drop-shadow(0 0 48px rgba(196,144,42,0.55));">🔮</div>
+      <div style="font-size:96px;margin-bottom:36px;line-height:1;filter:drop-shadow(0 0 48px rgba(198,168,107,0.55));">🔮</div>
       <h1>Oracle ของคุณ<br>มีชีวิตแล้ว</h1>
       <div style="display:inline-flex;align-items:center;gap:16px;margin-top:36px;color:rgba(240,238,248,.22);font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;">
         <span style="width:36px;height:1px;background:currentColor;"></span>
@@ -754,7 +754,7 @@
       const p = staticDots[i];
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(196,144,42,${p.opacity})`;
+      ctx.fillStyle = `rgba(198,168,107,${p.opacity})`;
       ctx.fill();
     }
 
@@ -766,7 +766,7 @@
         const alpha = p.opacity * (0.65 + 0.35 * Math.sin(p.flicker));
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(196,144,42,${alpha})`;
+        ctx.fillStyle = `rgba(198,168,107,${alpha})`;
         ctx.fill();
 
         p.y -= p.speed;
