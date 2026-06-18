@@ -723,24 +723,24 @@
   /* Cache reduced-motion once — not every frame */
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* Static layer: 130 dots — texture base, never move */
-  const STATIC_COUNT  = 130;
+  /* Static layer: 180 dots — texture base, never move */
+  const STATIC_COUNT  = 180;
   const staticDots = Array.from({length: STATIC_COUNT}, () => ({
     x:       Math.random() * window.innerWidth,
     y:       Math.random() * window.innerHeight,
-    r:       Math.random() * 1.0 + 0.5,   /* 0.5–1.5 px */
-    opacity: Math.random() * 0.08 + 0.06, /* 0.06–0.14 */
+    r:       Math.random() * 1.2 + 0.8,   /* 0.8–2.0 px */
+    opacity: Math.random() * 0.18 + 0.20, /* 0.20–0.38 — visible gold on dark bg */
   }));
 
-  /* Floating layer: 70 dots — rise slowly with flicker */
-  const FLOAT_COUNT  = 70;
+  /* Floating layer: 80 dots — rise slowly with flicker */
+  const FLOAT_COUNT  = 80;
   const floatDots = Array.from({length: FLOAT_COUNT}, () => ({
     x:       Math.random() * window.innerWidth,
     y:       Math.random() * window.innerHeight,
-    r:       Math.random() * 1.2 + 0.8,   /* 0.8–2.0 px */
+    r:       Math.random() * 1.5 + 1.0,   /* 1.0–2.5 px */
     speed:   Math.random() * 0.22 + 0.06, /* 0.06–0.28 px/frame */
     drift:   (Math.random() - 0.5) * 0.16,
-    opacity: Math.random() * 0.10 + 0.08, /* 0.08–0.18 */
+    opacity: Math.random() * 0.20 + 0.28, /* 0.28–0.48 — clearly visible ember */
     flicker: Math.random() * Math.PI * 2,
   }));
 
