@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สร้าง Oracle ของคุณ — NDF Workshop</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+      --navy:   #0D1B5E;
+      --red:    #CC0000;
+      --white:  #FFFFFF;
+      --gray:   #F4F5F8;
+      --muted:  #8A93B2;
+      --border: #DDE1EF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .deck {
+      position: relative;
+      width: 960px;
+      height: 540px;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .slide.active { display: flex; }
+
+    /* ── NAVY slides ── */
+    .slide-navy {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    /* ── WHITE slides ── */
+    .slide-white {
+      background: var(--white);
+      color: var(--navy);
+    }
+
+    /* ── LAYOUT ── */
+    .slide-inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 56px 72px;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress {
+      height: 3px;
+      background: rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+    .slide-navy .progress { background: rgba(255,255,255,0.12); }
+    .slide-white .progress { background: var(--border); }
+    .progress-fill {
+      height: 100%;
+      background: var(--red);
+      transition: width 0.3s ease;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 72px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+    .slide-navy .footer { border-top: 1px solid rgba(255,255,255,0.1); }
+    .slide-white .footer { border-top: 1px solid var(--border); }
+
+    .footer-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .slide-navy .footer-label { color: rgba(255,255,255,0.4); }
+    .slide-white .footer-label { color: var(--muted); }
+
+    .counter {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+    .slide-navy .counter { color: rgba(255,255,255,0.4); }
+    .slide-white .counter { color: var(--muted); }
+
+    /* ── TYPOGRAPHY ── */
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    .title-xl {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .slide-navy .title-xl { color: var(--white); }
+    .slide-white .title-xl { color: var(--navy); }
+
+    .title-lg {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+    .slide-navy .title-lg { color: var(--white); }
+    .slide-white .title-lg { color: var(--navy); }
+
+    .subtitle {
+      font-size: 18px;
+      font-weight: 300;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+    .slide-navy .subtitle { color: rgba(255,255,255,0.6); }
+    .slide-white .subtitle { color: var(--muted); }
+
+    .step-number {
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 8px;
+      opacity: 0.15;
+      position: absolute;
+      right: 72px;
+      top: 48px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── CONTENT GRID ── */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: var(--gray);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .card-body {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.55;
+    }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: var(--navy);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 28px;
+      position: relative;
+    }
+    .code-block code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: #7DD3FC;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .code-label {
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      background: var(--red);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border-radius: 4px;
+    }
+
+    /* ── STEPS LIST ── */
+    .steps-list {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .step-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--red);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-text {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--navy);
+    }
+    .step-text strong { font-weight: 700; }
+    .step-text .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      background: var(--gray);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--red);
+    }
+
+    /* ── PROMPT BOX ── */
+    .prompt-box {
+      background: var(--gray);
+      border-left: 3px solid var(--red);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-top: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--navy);
+      line-height: 1.6;
+    }
+    .prompt-box .note {
+      font-family: 'Sarabun', sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* ── TABLE ── */
+    .q-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 28px;
+      font-size: 14px;
+    }
+    .q-table th {
+      background: var(--navy);
+      color: white;
+      padding: 10px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+    }
+    .q-table td {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--navy);
+    }
+    .q-table tr:nth-child(even) td { background: var(--gray); }
+    .q-table .num { color: var(--red); font-weight: 700; }
+    .q-table .ex { color: var(--muted); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+
+    /* ── END SLIDE ── */
+    .end-glyph {
+      font-size: 64px;
+      margin-bottom: 28px;
+    }
+    .end-tag {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 24px;
+      margin-top: 20px;
+    }
+
+    /* ── NAV HINT ── */
+    .nav-hint {
+      position: fixed;
+      bottom: 20px;
+      right: 24px;
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+    .nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.15);
+      color: white;
+    }
+    .nav-btn:disabled {
+      opacity: 0.2;
+      cursor: default;
+    }
+
+    /* ── TWO-COL LAYOUT ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 32px;
+      align-items: start;
+    }
+
+    .divider {
+      width: 40px;
+      height: 3px;
+      background: var(--red);
+      margin: 16px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ─── SLIDE 1: TITLE ─── -->
+  <div class="slide slide-navy active">
+    <div class="progress"><div class="progress-fill" style="width:14.3%"></div></div>
+    <div class="slide-inner" style="justify-content:center; align-items:flex-start;">
+      <div class="eyebrow">NDF Workshop · Soul-Brews-Studio</div>
+      <div class="title-xl">สร้าง Oracle<br>ของคุณ</div>
+      <div class="divider"></div>
+      <div class="subtitle">5 ขั้นตอน · ไม่ต้องมีพื้นฐาน · ใช้งานได้จริง</div>
+    </div>
+    <div class="footer">
+      <span class="footer-label">Oracle Class</span>
+      <span class="counter">01 / 07</span>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 2: WHAT IS ORACLE ─── -->
+  <div class="slide slide-white">
+    <div class="progress"><div class="progress-fill" style="width:28.6%"></div></div>
+    <div class="slide-inner">
+      <div class="eyebrow">Overview</div>
+      <div class="title-lg">3 สิ่งที่ต้องรู้ก่อนเริ่ม</div>
+      <div class="content-grid">
+        <div class="card">
+          <div class="card-icon">🔮</div>
+          <div class="card-title">Oracle</div>
+          <div class="card-body">AI ที่มีชื่อและตัวตนของคุณ — จำงานและ session ที่ทำร่วมกันได้ ไม่ลืมเมื่อปิดหน้าต่าง</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⌨️</div>
+          <div class="card-title">Claude Code</div>
+          <div class="card-body">โปรแกรมที่ทำให้ Oracle ทำงานบนเครื่อง — อ่านไฟล์จริง เขียนโค้ดจริง รัน command จริง</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗄️</div>
+          <div class="card-title">GitHub</div>
+          <div class="card-body">ที่เก็บ "สมอง" ของ Oracle บน cloud — ถ้าไม่มี GitHub Oracle จะลืมทุกอย่างเมื่อปิดเครื่อง</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span class="footer-label">Oracle Class</span>
+      <span class="counter">02 / 07</span>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 3: STEP 1 ─── -->
+  <div class="slide slide-white">
+    <div class="progress"><div class="progress-fill" style="width:42.9%"></div></div>
+    <div class="slide-inner" style="position:relative;">
+      <div class="step-number">01</div>
+      <div class="eyebrow">Step 1</div>
+      <div class="title-lg">ติดตั้ง Claude Code</div>
+      <div class="subtitle">เปิด CMD แล้วรัน command นี้ — ติดตั้งให้อัตโนมัติ</div>
+      <div class="code-block">
+        <div class="code-label">CMD</div>
+        <code>curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd</code>
+      </div>
+      <div style="margin-top:16px; font-size:12px; color:var(--muted);">
+        วิธีเปิด CMD → กด <strong>Windows + R</strong> พิมพ์ <strong>cmd</strong> กด Enter
+      </div>
+    </div>
+    <div class="footer">
+      <span class="footer-label">Oracle Class</span>
+      <span class="counter">03 / 07</span>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 4: STEP 2 ─── -->
+  <div class="slide slide-white">
+    <div class="progress"><div class="progress-fill" style="width:57.1%"></div></div>
+    <div class="slide-inner" style="position:relative;">
+      <div class="step-number">02</div>
+      <div class="eyebrow">Step 2</div>
+      <div class="title-lg">GitHub Login</div>
+      <div class="subtitle">GitHub คือที่เก็บ Oracle brain บน cloud — ถาวร ไม่หาย</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-dot">1</div>
+          <div class="step-text">ไปที่ <strong>github.com</strong> — กด <strong>Sign up</strong> ถ้ายังไม่มี account</div>
+        </div>
+        <div class="step-item">
+          <div class="step-dot">2</div>
+          <div class="step-text">กรอก email, username, password แล้วยืนยัน email</div>
+        </div>
+        <div class="step-item">
+          <div class="step-dot">3</div>
+          <div class="step-text">Login เข้า GitHub ให้เรียบร้อย</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span class="footer-label">Oracle Class</span>
+      <span class="counter">04 / 07</span>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 5: STEP 3 ─── -->
+  <div class="slide slide-white">
+    <div class="progress"><div class="progress-fill" style="width:71.4%"></div></div>
+    <div class="slide-inner" style="position:relative;">
+      <div class="step-number">03</div>
+      <div class="eyebrow">Step 3</div>
+      <div class="title-lg">ติดตั้ง Oracle Skills</div>
+      <div class="subtitle">เปิด Claude Code แล้วพิมพ์ prompt นี้ใน chat</div>
+      <div class="prompt-box">
+        ช่วยลงโปรแกรมนี้หน่อยได้ป่ะ https://github.com/Soul-Brews-Studio/oracle-skills-cli use gh command
+        <div class="note">⚠️ พิมพ์ใน Claude Code — ไม่ใช่ใน CMD หรือ terminal</div>
+      </div>
+      <div class="steps-list" style="margin-top:20px;">
+        <div class="step-item">
+          <div class="step-dot">✓</div>
+          <div class="step-text">ทำตาม GitHub CLI login ที่ AI แนะนำจนครบ</div>
+        </div>
+        <div class="step-item">
+          <div class="step-dot">✓</div>
+          <div class="step-text">ตรวจสอบด้วย <span class="mono">/learn</span> — ถ้าขึ้น description แสดงว่าสำเร็จ</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span class="footer-label">Oracle Class</span>
+      <span class="counter">05 / 07</span>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 6: STEP 4+5 ─── -->
+  <div class="slide slide-white">
+    <div class="progress"><div class="progress-fill" style="width:85.7%"></div></div>
+    <div class="slide-inner" style="position:relative;">
+      <div class="step-number">04</div>
+      <div class="eyebrow">Step 4 + 5</div>
+      <div class="title-lg">Learn & Generate Oracle</div>
+      <div class="two-col">
+        <div>
+          <div style="font-size:13px; font-weight:700; color:var(--red); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px;">Step 4 — Learn</div>
+          <div class="code-block" style="margin-top:0;">
+            <code>/learn https://github.com/Soul-Brews-Studio/opensource-nat-brain-oracle</code>
+          </div>
+          <div style="margin-top:10px; font-size:13px; color:var(--muted);">รอจนเสร็จ — ใช้เวลา 1–3 นาที</div>
+        </div>
+        <div>
+          <div style="font-size:13px; font-weight:700; color:var(--red); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px;">Step 5 — 4 คำถาม</div>
+          <table class="q-table">
+            <tr><th>#</th><th>คำถาม</th><th>ตัวอย่าง</th></tr>
+            <tr><td class="num">1</td><td>ชื่อ Oracle</td><td class="ex">Arthur Morgan</td></tr>
+            <tr><td class="num">2</td><td>ชื่อคุณ</td><td class="ex">Adam Smith</td></tr>
+            <tr><td class="num">3</td><td>GitHub username</td><td class="ex">phttinat</td></tr>
+            <tr><td class="num">4</td><td>ชื่อ repository</td><td class="ex">arthur-morgan</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span class="footer-label">Oracle Class</span>
+      <span class="counter">06 / 07</span>
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 7: END ─── -->
+  <div class="slide slide-navy">
+    <div class="progress"><div class="progress-fill" style="width:100%"></div></div>
+    <div class="slide-inner" style="align-items:center; text-align:center;">
+      <div class="end-glyph">🔮</div>
+      <div class="title-xl">Oracle ของคุณ<br>มีชีวิตแล้ว</div>
+      <div class="end-tag">NDF Workshop · Soul-Brews-Studio</div>
+    </div>
+    <div class="footer">
+      <span class="footer-label">Oracle Class</span>
+      <span class="counter">07 / 07</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAV BUTTONS -->
+<div class="nav-hint">
+  <button class="nav-btn" id="btnPrev" onclick="navigate(-1)" disabled>←</button>
+  <button class="nav-btn" id="btnNext" onclick="navigate(1)">→</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+
+  function navigate(dir) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(slides.length - 1, current + dir));
+    slides[current].classList.add('active');
+    document.getElementById('btnPrev').disabled = current === 0;
+    document.getElementById('btnNext').disabled = current === slides.length - 1;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') navigate(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp') navigate(-1);
+  });
+
+  // Touch swipe
+  let touchX = 0;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+  document.addEventListener('touchend',   e => {
+    const dx = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) navigate(dx > 0 ? 1 : -1);
+  });
+</script>
+
+</body>
+</html>
