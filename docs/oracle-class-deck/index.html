@@ -720,41 +720,65 @@
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
 
-  const PARTICLE_COUNT = 28;
-  const particles = Array.from({length: PARTICLE_COUNT}, () => ({
+  /* Cache reduced-motion once — not every frame */
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* Static layer: 130 dots — texture base, never move */
+  const STATIC_COUNT  = 130;
+  const staticDots = Array.from({length: STATIC_COUNT}, () => ({
     x:       Math.random() * window.innerWidth,
     y:       Math.random() * window.innerHeight,
-    r:       Math.random() * 1.2 + 0.4,
-    speed:   Math.random() * 0.25 + 0.08,
-    drift:   (Math.random() - 0.5) * 0.18,
-    opacity: Math.random() * 0.12 + 0.04,
+    r:       Math.random() * 1.0 + 0.5,   /* 0.5–1.5 px */
+    opacity: Math.random() * 0.08 + 0.06, /* 0.06–0.14 */
+  }));
+
+  /* Floating layer: 70 dots — rise slowly with flicker */
+  const FLOAT_COUNT  = 70;
+  const floatDots = Array.from({length: FLOAT_COUNT}, () => ({
+    x:       Math.random() * window.innerWidth,
+    y:       Math.random() * window.innerHeight,
+    r:       Math.random() * 1.2 + 0.8,   /* 0.8–2.0 px */
+    speed:   Math.random() * 0.22 + 0.06, /* 0.06–0.28 px/frame */
+    drift:   (Math.random() - 0.5) * 0.16,
+    opacity: Math.random() * 0.10 + 0.08, /* 0.08–0.18 */
     flicker: Math.random() * Math.PI * 2,
   }));
 
   let frameId;
-  function drawParticles(ts) {
+  function drawParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    /* skip animation if user prefers reduced motion */
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      particles.forEach(p => {
+    /* Static layer — always draw regardless of reduced-motion
+       dots have no movement so they never cause distraction */
+    for (let i = 0; i < STATIC_COUNT; i++) {
+      const p = staticDots[i];
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(212,148,42,${p.opacity})`;
+      ctx.fill();
+    }
+
+    /* Floating layer — skip if user prefers reduced motion */
+    if (!reducedMotion.matches) {
+      for (let i = 0; i < FLOAT_COUNT; i++) {
+        const p = floatDots[i];
         p.flicker += 0.022;
-        const alpha = p.opacity * (0.7 + 0.3 * Math.sin(p.flicker));
+        const alpha = p.opacity * (0.65 + 0.35 * Math.sin(p.flicker));
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(212, 148, 42, ${alpha})`;
+        ctx.fillStyle = `rgba(212,148,42,${alpha})`;
         ctx.fill();
 
-        p.y    -= p.speed;
-        p.x    += p.drift;
+        p.y -= p.speed;
+        p.x += p.drift;
 
         if (p.y < -8) {
           p.y = canvas.height + 8;
           p.x = Math.random() * canvas.width;
         }
-        if (p.x < -8)                p.x = canvas.width  + 8;
-        if (p.x > canvas.width  + 8) p.x = -8;
-      });
+        if (p.x < -8)               p.x = canvas.width + 8;
+        if (p.x > canvas.width + 8) p.x = -8;
+      }
     }
 
     frameId = requestAnimationFrame(drawParticles);
