@@ -427,8 +427,8 @@
       <div class="preq-list">
         <div class="preq-row">
           <div class="preq-icon">💻</div>
-          <div class="preq-name">Windows PC</div>
-          <div class="preq-desc">ใช้ CMD ได้ กด Windows+R พิมพ์ cmd แล้ว Enter</div>
+          <div class="preq-name">Windows / Mac</div>
+          <div class="preq-desc">Windows: CMD (Win+R → cmd) &ensp;·&ensp; Mac: Terminal (⌘ Space → terminal)</div>
           <span class="preq-badge badge-have">มีอยู่แล้ว</span>
         </div>
         <div class="preq-row">
@@ -461,15 +461,27 @@
       <div class="ghost">1</div>
       <div class="kicker">Step 1 · ติดตั้ง</div>
       <h2>Claude Code</h2>
-      <div class="lead">เปิด CMD แล้วรัน script เพื่อติดตั้ง</div>
-      <div class="code-block">
-        <div class="code-chrome">
-          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-          <span class="tab">CMD</span>
+      <div class="lead">รัน script ตามระบบปฏิบัติการของคุณ</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px;">
+        <div class="code-block" style="margin-top:0;">
+          <div class="code-chrome">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="tab">Windows · CMD</span>
+          </div>
+          <div class="code-body" style="font-size:17px;">curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd</div>
         </div>
-        <div class="code-body">curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd</div>
+        <div class="code-block" style="margin-top:0;">
+          <div class="code-chrome">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="tab">Mac · Terminal</span>
+          </div>
+          <div class="code-body" style="font-size:17px;">curl -fsSL https://claude.ai/install.sh | sh</div>
+        </div>
       </div>
-      <div class="hint">เปิด CMD → กด <strong>Windows + R</strong> → พิมพ์ <strong>cmd</strong> → Enter</div>
+      <div class="hint" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <span>Windows → กด <strong>Win + R</strong> → พิมพ์ <strong>cmd</strong> → Enter</span>
+        <span>Mac → กด <strong>⌘ Space</strong> → พิมพ์ <strong>terminal</strong> → Enter</span>
+      </div>
     </div>
     <div class="foot"><span>Oracle Class</span><span>4 / 11</span></div>
   </div>
