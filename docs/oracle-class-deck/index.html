@@ -589,22 +589,21 @@
       <div class="ghost">3</div>
       <div class="kicker">Step 3 · ต่อ</div>
       <h2>ทำตามขั้นตอน · ตรวจสอบผล</h2>
-      <div class="steps" style="margin-top:48px;">
+      <div class="steps" style="margin-top:32px;">
         <div class="step-row">
           <div class="step-num check">✓</div>
-          <div class="step-body">AI จะถาม login GitHub ผ่าน <span class="pill">gh</span> ทำตามขั้นตอนจนครบ</div>
+          <div class="step-body">AI จะถาม login GitHub ผ่าน <span class="pill">gh</span> และติดตั้ง <span class="pill">bun</span> อัตโนมัติ ทำตามจนครบ</div>
         </div>
         <div class="step-row">
           <div class="step-num check">✓</div>
-          <div class="step-body">เมื่อเสร็จจะมี <strong>14 skills</strong> ถูกติดตั้งใน <span class="pill">~/.claude/skills</span></div>
+          <div class="step-body">เมื่อเสร็จจะมี <strong>6 skills</strong> ถูกติดตั้งใน <span class="pill">~/.claude/skills</span></div>
         </div>
-        <div class="step-row">
-          <div class="step-num check">✓</div>
-          <div class="step-body">ตรวจสอบด้วย <span class="pill">/learn</span> ถ้าขึ้น description แสดงว่าสำเร็จ</div>
-        </div>
-        <div class="step-row">
-          <div class="step-num check">✓</div>
-          <div class="step-body"><strong>Restart</strong> Claude Code เพื่อให้ skills ใหม่ทำงาน</div>
+      </div>
+      <div style="margin-top:24px;padding:22px 28px;background:rgba(198,168,107,0.08);border:1px solid rgba(198,168,107,0.35);border-radius:10px;">
+        <div style="font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">⚠ ต้อง Restart Claude Code ก่อนถึงจะใช้ skills ได้</div>
+        <div style="font-size:21px;color:var(--w60);line-height:1.6;">
+          พิมพ์ <span class="pill">/exit</span> หรือกด <strong style="color:var(--ink);">Ctrl + C</strong> เพื่อออก
+          &ensp;→&ensp; แล้วพิมพ์ <span class="pill">claude</span> ใหม่อีกครั้ง
         </div>
       </div>
     </div>
