@@ -526,8 +526,25 @@
       <div class="ghost">3</div>
       <div class="kicker">Step 3 · Skills</div>
       <h2>ติดตั้ง Oracle Skills</h2>
-      <div class="lead">เปิด Terminal → พิมพ์ <code style="font-family:'JetBrains Mono',monospace;font-size:22px;background:var(--sur2);padding:2px 10px;border-radius:5px;color:var(--blue);">claude</code> → แล้วพิมพ์ข้อความนี้</div>
-      <div class="prompt-box" style="margin-top:36px;">
+      <div class="lead">เปิด Terminal → พิมพ์ <code style="font-family:'JetBrains Mono',monospace;font-size:22px;background:var(--sur2);padding:2px 10px;border-radius:5px;color:var(--blue);">claude</code> → ครั้งแรกจะถามให้ Login ก่อน</div>
+      <div style="margin-top:20px;padding:18px 24px;background:var(--sur);border:1px solid var(--w08);border-radius:10px;">
+        <div style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">เลือก Login Method</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="font-size:21px;color:var(--ink);display:flex;align-items:baseline;gap:12px;">
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--goldb);font-weight:700;width:20px;flex-shrink:0;">1</span>
+            <span><strong>Claude account</strong> <span style="color:var(--w35);font-size:18px;">— มี Claude Pro / Max อยู่แล้ว → เลือกอันนี้</span></span>
+          </div>
+          <div style="font-size:21px;color:var(--w60);display:flex;align-items:baseline;gap:12px;">
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--w35);font-weight:700;width:20px;flex-shrink:0;">2</span>
+            <span>Anthropic Console <span style="color:var(--w35);font-size:18px;">— ไม่มี subscription จ่ายตาม token ที่ใช้</span></span>
+          </div>
+          <div style="font-size:21px;color:var(--w35);display:flex;align-items:baseline;gap:12px;">
+            <span style="font-family:'JetBrains Mono',monospace;color:var(--w35);font-weight:700;width:20px;flex-shrink:0;">3</span>
+            <span>3rd-party <span style="font-size:18px;">— AWS / Azure / GCP ไม่เกี่ยวกับ workshop นี้</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="prompt-box" style="margin-top:20px;">
         <div class="prompt-chrome">
           <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
           <span class="tab">Claude Code</span>
