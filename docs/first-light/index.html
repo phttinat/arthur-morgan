@@ -366,6 +366,10 @@
       width:24px; background:var(--gold);
       box-shadow:0 0 10px rgba(198,168,107,.5);
     }
+    .faq { background:var(--sur2); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:15px 18px; }
+    .faq-q { font-weight:700; font-size:15px; margin-bottom:8px; color:var(--gold); line-height:1.4; }
+    .faq-a { font-size:13.5px; line-height:1.65; color:rgba(240,238,248,.78); }
+    .faq code { font-family:'JetBrains Mono',monospace; font-size:.86em; background:rgba(0,0,0,.32); padding:1px 7px; border-radius:5px; color:var(--blue); word-break:break-all; }
   </style>
 </head>
 <body>
@@ -388,7 +392,7 @@
       <div class="rule"></div>
       <div class="lead">ติดตั้ง 4 ขั้นตอน &ensp;·&ensp; ทำงานทุกวัน &ensp;·&ensp; ส่ง Report ทุกศุกร์</div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>1 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>1 / 13</span></div>
   </div>
 
   <!-- 2 · OVERVIEW -->
@@ -415,7 +419,7 @@
         </div>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>2 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>2 / 13</span></div>
   </div>
 
   <!-- 3 · PREREQS -->
@@ -464,7 +468,7 @@
         </div>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>3 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>3 / 13</span></div>
   </div>
 
   <!-- 4 · STEP 1 -->
@@ -495,11 +499,14 @@
         <span>Windows → กด <strong>Win + R</strong> → พิมพ์ <strong>cmd</strong> → Enter</span>
         <span>Mac → กด <strong>⌘ Space</strong> → พิมพ์ <strong>terminal</strong> → Enter</span>
       </div>
+      <div class="hint" style="margin-top:14px;grid-column:span 2;color:var(--gold);opacity:.85;">
+        ⚠ Windows — ถ้าขึ้น <code style="font-family:'JetBrains Mono',monospace;background:var(--sur2);padding:1px 8px;border-radius:4px;">'&amp;&amp;' is not a valid statement separator</code> = คุณอยู่ใน <strong>PowerShell</strong> ไม่ใช่ CMD → ใช้ <code style="font-family:'JetBrains Mono',monospace;background:var(--sur2);padding:1px 8px;border-radius:4px;">irm https://claude.ai/install.ps1 | iex</code> แทน
+      </div>
       <div class="hint" style="margin-top:10px;grid-column:span 2;color:var(--gold);opacity:.8;">
         ⚠ Mac เท่านั้น — ถ้าพิมพ์ <code style="font-family:'JetBrains Mono',monospace;background:var(--sur2);padding:1px 8px;border-radius:4px;">claude</code> แล้วขึ้น command not found ให้รัน: <code style="font-family:'JetBrains Mono',monospace;background:var(--sur2);padding:1px 8px;border-radius:4px;">echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc</code>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>4 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>4 / 13</span></div>
   </div>
 
   <!-- 5 · STEP 2 -->
@@ -529,7 +536,7 @@
         </div>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>5 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>5 / 13</span></div>
   </div>
 
   <!-- 6 · STEP 3 -->
@@ -570,7 +577,7 @@
         <div class="prompt-note">พิมพ์ใน Claude Code ที่รันอยู่ใน terminal — ไม่ใช่ในเว็บ claude.ai</div>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>6 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>6 / 13</span></div>
   </div>
 
   <!-- 7 · STEP 3 PROMPTS -->
@@ -591,7 +598,7 @@
         </div>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>7 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>7 / 13</span></div>
   </div>
 
   <!-- 8 · STEP 3 VERIFY -->
@@ -620,7 +627,7 @@
         </div>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>8 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>8 / 13</span></div>
   </div>
 
   <!-- 8 · STEP 4 -->
@@ -640,7 +647,7 @@
       </div>
       <div class="hint">⚠ <span style="color:var(--goldb);font-family:'JetBrains Mono',monospace;">npm run setup</span> = <strong>เลือกชื่อตัวเองจากลิสต์</strong> (ไม่ต้องแก้ไฟล์ ไม่ต้องพิมพ์ชื่อ → ชื่อตรง roster แน่นอน) ทำ <strong>ก่อนรัน claude</strong> · ครั้งเดียว ห้ามเปลี่ยนกลางสัปดาห์</div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>9 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>9 / 13</span></div>
   </div>
 
   <!-- 9 · STEP 5 -->
@@ -666,7 +673,7 @@
         </div>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>10 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>10 / 13</span></div>
   </div>
 
   <!-- 11 · WEEKLY REPORT -->
@@ -695,10 +702,47 @@
         </div>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>11 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>11 / 13</span></div>
   </div>
 
-  <!-- 11 · END -->
+  <!-- 12 · TROUBLESHOOT -->
+  <div class="slide">
+    <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
+    <div class="body">
+      <div class="ghost">?</div>
+      <div class="kicker">ปัญหาที่เจอบ่อย</div>
+      <h2>เจอแบบนี้ ทำยังไง</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 22px;margin-top:28px;">
+        <div class="faq">
+          <div class="faq-q">❌ error <code>'&amp;&amp;' is not a valid statement separator</code></div>
+          <div class="faq-a">คุณอยู่ใน <strong>PowerShell</strong> ไม่ใช่ CMD → ใช้คำสั่งนี้แทน:<br><code>irm https://claude.ai/install.ps1 | iex</code><br>(หรือพิมพ์ <code>cmd</code> ก่อน แล้วค่อยวางคำสั่งเดิม)</div>
+        </div>
+        <div class="faq">
+          <div class="faq-q">📁 claude ลงที่ <code>C:\Users\...\.local\bin</code> ทุกที</div>
+          <div class="faq-a"><strong>ปกติ ไม่ใช่บั๊ก</strong> — นั่นคือที่อยู่ตัวโปรแกรม (ลงครั้งเดียวพอ) · <code>cd</code> = บอกว่าจะ<strong>ทำงานที่ไหน</strong> ไม่ใช่จะลงที่ไหน</div>
+        </div>
+        <div class="faq">
+          <div class="faq-q">❓ พิมพ์ <code>claude</code> แล้วขึ้น not recognized</div>
+          <div class="faq-a"><strong>ปิด-เปิด Terminal ใหม่</strong> (ให้ PATH อัปเดต) แล้วลองอีกครั้ง</div>
+        </div>
+        <div class="faq">
+          <div class="faq-q">🗂 งานจริงอยู่คนละ folder กับ Oracle</div>
+          <div class="faq-a">ไม่ต้องย้าย claude — เปิดจาก <span class="pill">intern-oracle-ai</span> เสมอ แล้ว<strong>บอก path งาน</strong>ให้มัน เช่น "แก้ไฟล์ใน D:\game\…"</div>
+        </div>
+        <div class="faq">
+          <div class="faq-q">🛑 Windows ขึ้น error สีแดงตอนรัน script</div>
+          <div class="faq-a">เปิด PowerShell พิมพ์ครั้งเดียว:<br><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q">🔑 ลงเสร็จแต่ login ไม่ผ่าน</div>
+          <div class="faq-a">Claude Code ต้องใช้บัญชี <strong>Pro / Max / Team</strong> — แพลนฟรี claude.ai ใช้ไม่ได้</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot"><span>Oracle Class</span><span>12 / 13</span></div>
+  </div>
+
+  <!-- 13 · END -->
   <div class="slide">
     <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
     <div class="body" style="align-items:center;justify-content:center;text-align:center;">
@@ -710,7 +754,7 @@
         <span style="width:36px;height:1px;background:currentColor;"></span>
       </div>
     </div>
-    <div class="foot"><span>Oracle Class</span><span>12 / 12</span></div>
+    <div class="foot"><span>Oracle Class</span><span>13 / 13</span></div>
   </div>
 
 </div>
